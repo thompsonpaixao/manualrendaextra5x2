@@ -1,0 +1,21 @@
+{
+  "name": "manual-renda-extra-5x2",
+  "version": "1.0.0",
+  "description": "Ecossistema completo do infoproduto Manual Renda Extra 5x2 (4 LPs, Checkout e Dashboard de Membros com Upsell)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "landing-page",
+    "infoproduto",
+    "direct-response",
+    "bento-grid",
+    "dashboard",
+    "upsell",
+    "5x2"
+  ],
+  "author": "Antigravity & User",
+  "license": "ISC"
+}

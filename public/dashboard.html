@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área de Membros • Manual Renda Extra 5x2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- ====================================================================
+       1. TELA DE LOGIN MINIMALISTA (FUNDO CLARO #F8FAFC)
+       ==================================================================== -->
+  <section class="login-screen-wrapper" id="loginScreen">
+    <div class="login-card">
+      <div class="login-brand-badge">
+        <span class="notice-pulse-dot" style="background: var(--accent-green);"></span>
+        Área de Membros Oficial
+      </div>
+
+      <div class="brand-logo" style="justify-content: center; margin-bottom: 0.75rem;">
+        <span class="brand-badge">5X2</span>
+        <span>MANUAL RENDA EXTRA</span>
+      </div>
+
+      <h1 class="login-title">Acesse Seus Manuais</h1>
+      <p class="login-subtitle">Digite seu e-mail e senha cadastrados para acessar sua biblioteca de materiais práticos.</p>
+
+      <form id="memberLoginForm" class="login-form">
+        <div class="login-field">
+          <label for="loginEmail">E-mail ou Usuário</label>
+          <input type="text" id="loginEmail" placeholder="admin ou seuemail@exemplo.com" required autocomplete="username">
+        </div>
+
+        <div class="login-field">
+          <label for="loginPassword">Senha de Acesso</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn-login-submit">
+          ENTRAR NA ÁREA DE MEMBROS
+        </button>
+      </form>
+
+      <!-- REGRA DE MOCKUP: ATALHOS DE TESTE IMEDIATO -->
+      <div class="login-mock-helpers">
+        <div class="mock-helper-title">Atalhos de Demonstração Rápida:</div>
+        <div class="mock-buttons-grid">
+          <button type="button" class="btn-mock-preset admin-preset" onclick="quickLoginAs('admin')">
+            <span>Login Admin (admin / 1234)</span>
+            <span class="preset-badge">Tudo Desbloqueado</span>
+          </button>
+          
+          <button type="button" class="btn-mock-preset" onclick="quickLoginAs('student')">
+            <span>Login Aluno Start (Alimentação)</span>
+            <span class="preset-badge">Testar Cadeado & Cross-sell</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <a href="alimentacao.html" style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-decoration: underline;">
+          ← Voltar para as Landing Pages
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2. VISÃO DA DASHBOARD (PÓS-LOGIN COM SIDEBAR E VITRINE NETFLIX)
+       ==================================================================== -->
+  <div class="dashboard-layout" id="dashboardScreen" style="display: none;">
+    
+    <!-- MENU LATERAL SIMPLES (MEUS ACESSOS, PERFIL, SUPORTE) -->
+    <aside class="dash-sidebar">
+      <div>
+        <div class="dash-brand">
+          <span class="brand-badge" style="background: var(--text-dark); color: #fff; padding: 4px 8px; border-radius: 6px;">5X2</span>
+          <span>RENDA EXTRA</span>
+        </div>
+
+        <nav class="dash-nav">
+          <div class="dash-nav-item active" onclick="switchSidebarTab('acessos')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/>
+            </svg>
+            <span>Meus Acessos</span>
+          </div>
+
+          <div class="dash-nav-item" onclick="switchSidebarTab('perfil')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <span>Perfil & Conta</span>
+          </div>
+
+          <div class="dash-nav-item" onclick="switchSidebarTab('suporte')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+            </svg>
+            <span>Suporte & Dúvidas</span>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Card do Usuário Logado & Logout -->
+      <div class="sidebar-bottom-card">
+        <div class="user-quick-profile">
+          <div class="user-avatar-circle" id="dashUserInitials">A</div>
+          <div>
+            <div class="user-meta-name" id="dashUserName">Aluno 5x2</div>
+            <div class="user-meta-tier" id="dashUserRole">Plano Start</div>
+          </div>
+        </div>
+
+        <button class="btn-sidebar-logout" onclick="logoutUser()">
+          Encerrar Sessão (Sair)
+        </button>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL DA DASHBOARD -->
+    <main class="dash-main">
+      
+      <!-- TOPBAR SUPERIOR -->
+      <div class="dash-topbar">
+        <div class="dash-greeting">
+          <h2>Central de Conteúdos 5x2</h2>
+          <p>Escolha um dos manuais abaixo para iniciar a execução no seu dia livre.</p>
+        </div>
+
+        <div class="dash-top-actions">
+          <div id="dashPlanBadge" class="plan-status-pill start">
+            Status: Plano Start (1/4 Desbloqueado)
+          </div>
+
+          <!-- Switcher rápido de demonstração -->
+          <button onclick="toggleQuickDemoState()" style="font-size: 0.76rem; background: #E2E8F0; border: none; padding: 0.45rem 0.85rem; border-radius: 6px; font-weight: 700; cursor: pointer; color: #1E293B;">
+            Alternar Visão (Start ⇄ VIP)
+          </button>
+        </div>
+      </div>
+
+      <!-- BANNER DE BOAS-VINDAS ESTILO BENTO -->
+      <div class="dash-welcome-banner">
+        <div class="welcome-content">
+          <span class="welcome-badge">O Fim da Escala 6x1</span>
+          <h3>Use seu dia livre para fazer o seu próprio 13º salário.</h3>
+          <p>
+            Sem enrolação teórica: cada manual abaixo foi construído para ser lido em 25 minutos com planilhas de lucro automático e scripts prontos para colocar dinheiro no seu bolso já no próximo final de semana.
+          </p>
+        </div>
+      </div>
+
+      <!-- VITRINE ESTILO NETFLIX COM 4 CAPAS DE PRODUTOS -->
+      <div class="showcase-header">
+        <h3 class="showcase-title">Sua Biblioteca de Manuais Práticos</h3>
+        <span class="showcase-counter">4 Categorias Oficiais</span>
+      </div>
+
+      <!-- GRID NETFLIX (Alimentação, Rua, Digital, Artesanato) -->
+      <div class="netflix-grid" id="netflixShowcaseGrid">
+        <!-- Renderizado dinamicamente via dashboard.js com controle de cadeados -->
+      </div>
+
+      <!-- SEÇÃO BENTO DE ATALHOS RÁPIDOS & SUPORTE -->
+      <div class="bento-grid" style="margin-top: 2rem;">
+        <div class="bento-card col-span-6">
+          <span class="bento-card-tag highlight">Regra de Ouro 5x2</span>
+          <h4 class="bento-card-title">Como tirar o máximo proveito:</h4>
+          <p class="bento-card-desc">
+            1. Escolha <strong>apenas 1 manual</strong> para o próximo fim de semana.<br>
+            2. Abra a planilha correspondente e insira seus custos locais.<br>
+            3. Use os scripts de validação para vender antes mesmo de produzir.
+          </p>
+        </div>
+
+        <div class="bento-card col-span-6">
+          <span class="bento-card-tag">Canal Oficial</span>
+          <h4 class="bento-card-title">Dúvidas com as Planilhas?</h4>
+          <p class="bento-card-desc">
+            Nosso time de tutores analisa seus cálculos de margem líquida em até 2 horas úteis pelo WhatsApp exclusivo de suporte aos alunos.
+          </p>
+          <a href="https://wa.me/" target="_blank" class="btn-open-product" style="display: inline-block; margin-top: 1rem; text-align: center; background: #16A34A;">
+            Falar com Suporte VIP no WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- BARRA FLUTUANTE DE NAVEGAÇÃO RÁPIDA (DEMO) -->
+  <div class="eco-switcher">
+    <span class="eco-switcher-title">Navegar LPs:</span>
+    <a href="alimentacao.html" class="eco-link">1. Cozinha</a>
+    <a href="na-rua.html" class="eco-link">2. Na Rua</a>
+    <a href="digital.html" class="eco-link">3. Digital</a>
+    <a href="artesanato.html" class="eco-link">4. Artesanato</a>
+    <a href="checkout.html" class="eco-link">Checkout</a>
+    <a href="dashboard.html" class="eco-link active">Dashboard</a>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script>
+    function switchSidebarTab(tabName) {
+      document.querySelectorAll('.dash-nav-item').forEach(el => el.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      if (tabName === 'perfil') {
+        alert('Painel de Perfil: Dados de acesso do usuário, histórico de compras e alteração de senha.');
+      } else if (tabName === 'suporte') {
+        alert('Central de Suporte: Nosso atendimento funciona de segunda a sábado das 08h às 20h.');
+      }
+    }
+
+    function toggleQuickDemoState() {
+      if (!currentUser) return;
+      if (currentUser.unlocked.length >= 4) {
+        currentUser = {
+          role: 'student',
+          name: 'Aluno Plano Start',
+          email: 'aluno@rendaextra.com',
+          unlocked: ['alimentacao']
+        };
+      } else {
+        currentUser = {
+          role: 'admin',
+          name: 'Administrador VIP',
+          email: 'admin@rendaextra.com',
+          unlocked: ['alimentacao', 'na-rua', 'digital', 'artesanato']
+        };
+      }
+      saveUserSession();
+      updateUserInterface();
+      renderNetflixShowcase();
+    }
+  </script>
+</body>
+</html>

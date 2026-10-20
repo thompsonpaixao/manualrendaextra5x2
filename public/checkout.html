@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Seguro • Manual Renda Extra 5x2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background-color: #0F172A;
+      color: #FFFFFF;
+      padding-top: 48px;
+    }
+    .checkout-page-container {
+      max-width: 1040px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+    .checkout-flow-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .checkout-form-box {
+      background: #1E293B;
+      border: 1px solid #334155;
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .checkout-summary-box {
+      background: #1E293B;
+      border: 2px solid var(--accent-green);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(22, 163, 74, 0.2);
+    }
+    .form-step-title {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid #334155;
+    }
+    .form-step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+    .plan-selector-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .plan-select-card {
+      background: #0F172A;
+      border: 1px solid #334155;
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .plan-select-card.active {
+      border-color: var(--accent-green);
+      background: rgba(22, 163, 74, 0.08);
+      box-shadow: 0 0 15px rgba(22, 163, 74, 0.3);
+    }
+    .plan-select-card .badge-rec {
+      position: absolute;
+      top: -10px;
+      right: 10px;
+      background: var(--accent-green);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .plan-select-card h4 {
+      font-size: 0.95rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .plan-select-card .price {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #4ADE80;
+    }
+    .input-dark {
+      background: #0F172A !important;
+      border: 1px solid #334155 !important;
+      color: #FFFFFF !important;
+    }
+    .input-dark:focus {
+      border-color: var(--accent-green) !important;
+    }
+    .category-choice-group {
+      margin-bottom: 1.25rem;
+      display: none;
+    }
+    .category-choice-group.show {
+      display: block;
+    }
+    .category-choice-group select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: #0F172A;
+      border: 1px solid #334155;
+      border-radius: var(--radius-sm);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 850px) {
+      .checkout-flow-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- [BLOCO 0] BARRA FIXA VERMELHA -->
+  <div class="top-notice-bar">
+    <div class="notice-content">
+      <span class="notice-badge">
+        <span class="notice-pulse-dot"></span>
+        Alerta Importante
+      </span>
+      <span>Atenção: O fim da escala 6x1 te deu o recurso mais valioso do mundo. Use seu dia livre para fazer o seu próprio 13º salário.</span>
+    </div>
+  </div>
+
+  <div class="checkout-page-container">
+    
+    <div style="text-align: center; margin-bottom: 2.5rem;">
+      <a href="index.html" class="brand-logo" style="justify-content: center; margin-bottom: 0.75rem;">
+        <span class="brand-badge">5X2</span>
+        <span style="color: #fff;">MANUAL RENDA EXTRA • CHECKOUT</span>
+      </a>
+      <h1 class="checkout-title">Transforme seu novo tempo livre em lucro real.</h1>
+      <p class="checkout-subtitle">Acesso liberado no mesmo segundo após a confirmação.</p>
+    </div>
+
+    <div class="checkout-flow-grid">
+      
+      <!-- FORMULÁRIO DE PAGAMENTO -->
+      <div class="checkout-form-box">
+        
+        <!-- Passo 1: Escolha do Plano -->
+        <div class="form-step-title">
+          <span class="form-step-number">1</span>
+          <span>Selecione a Modalidade de Acesso</span>
+        </div>
+
+        <div class="plan-selector-tabs">
+          <div class="plan-select-card" id="selectCardStart" onclick="setCheckoutPlan('start')">
+            <h4>Plano Start</h4>
+            <p style="font-size: 0.75rem; color: #94A3B8; margin-bottom: 0.4rem;">1 Categoria Específica</p>
+            <div class="price">R$ 14,90</div>
+          </div>
+
+          <div class="plan-select-card active" id="selectCardVip" onclick="setCheckoutPlan('vip')">
+            <span class="badge-rec">MAIS ESCOLHIDO</span>
+            <h4>Plano VIP Completo</h4>
+            <p style="font-size: 0.75rem; color: #94A3B8; margin-bottom: 0.4rem;">4 Categorias + Todos os Bônus</p>
+            <div class="price">R$ 34,90</div>
+          </div>
+        </div>
+
+        <!-- Seletor de Categoria se Plano Start -->
+        <div class="category-choice-group" id="categoryChoiceWrapper">
+          <label style="display: block; font-size: 0.8rem; font-weight: 700; color: #94A3B8; margin-bottom: 0.35rem; text-transform: uppercase;">
+            Qual categoria você deseja liberar no Plano Start?
+          </label>
+          <select id="selectedStartCategory" onchange="updateSummary()">
+            <option value="alimentacao">1. Alimentação Lucrativa (Marmitas & Doces)</option>
+            <option value="na-rua">2. Venda Rápida na Rua (Sinais & Pontos)</option>
+            <option value="digital">3. Operações Digitais Dark (100% Anônimo)</option>
+            <option value="artesanato">4. Artesanato & Presentes (Sob Encomenda)</option>
+          </select>
+        </div>
+
+        <!-- Passo 2: Dados Pessoais -->
+        <div class="form-step-title" style="margin-top: 2rem;">
+          <span class="form-step-number">2</span>
+          <span>Dados para Criação da Sua Conta</span>
+        </div>
+
+        <form id="standaloneCheckoutForm" onsubmit="processStandaloneCheckout(event)">
+          <div class="checkout-form-group">
+            <label style="color: #CBD5E1;">Nome Completo</label>
+            <input type="text" id="custName" class="input-dark" placeholder="Seu nome completo" required value="Aluno do Método 5x2">
+          </div>
+
+          <div class="checkout-form-group">
+            <label style="color: #CBD5E1;">E-mail (Seu Login de Acesso à Área de Membros)</label>
+            <input type="email" id="custEmail" class="input-dark" placeholder="seuemail@exemplo.com" required value="aluno@rendaextra.com">
+          </div>
+
+          <div class="checkout-form-group">
+            <label style="color: #CBD5E1;">WhatsApp para Recebimento do Acesso</label>
+            <input type="tel" id="custPhone" class="input-dark" placeholder="(11) 99999-9999" required value="(11) 98765-4321">
+          </div>
+
+          <!-- Passo 3: Pagamento -->
+          <div class="form-step-title" style="margin-top: 2rem;">
+            <span class="form-step-number">3</span>
+            <span>Forma de Pagamento</span>
+          </div>
+
+          <div class="payment-methods-tabs" style="margin-bottom: 1.5rem;">
+            <div class="pay-tab active" id="tabPix" onclick="switchPayMethod('pix')" style="background: #0F172A; color: #fff; border-color: var(--accent-green);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 12l10 10 10-10L12 2zm0 3.5L18.5 12 12 18.5 5.5 12 12 5.5z"/></svg>
+              PIX (Acesso Imediato)
+            </div>
+            <div class="pay-tab" id="tabCard" onclick="switchPayMethod('card')" style="background: #0F172A; color: #94A3B8; border-color: #334155;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+              Cartão de Crédito
+            </div>
+          </div>
+
+          <button type="submit" id="btnFinishOrder" class="btn-primary-pulse" style="width: 100%; border-radius: 12px; font-size: 1.1rem; padding: 1.2rem;">
+            GARANTIR MEU ACESSO AGORA
+          </button>
+        </form>
+
+      </div>
+
+      <!-- RESUMO DO PEDIDO -->
+      <div class="checkout-summary-box">
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #334155;">
+          Resumo do Seu Pedido
+        </h3>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+          <div>
+            <h4 id="summaryPlanTitle" style="font-size: 1.05rem; font-weight: 800; color: #4ADE80;">PLANO VIP COMPLETO</h4>
+            <p id="summaryPlanDesc" style="font-size: 0.82rem; color: #94A3B8;">Acesso às 4 Categorias + 4 Planilhas + Scripts</p>
+          </div>
+          <span id="summaryPlanPrice" style="font-size: 1.45rem; font-weight: 900; color: #FFFFFF;">R$ 34,90</span>
+        </div>
+
+        <div style="border-top: 1px dashed #334155; padding-top: 1rem; margin-top: 1rem;">
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.85rem; color: #CBD5E1;">
+            <li style="display: flex; align-items: center; gap: 0.45rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Acesso vitalício sem cobranças recorrentes
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.45rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Garantia blindada de devolução em 7 dias
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.45rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Liberação imediata na Área de Membros
+            </li>
+          </ul>
+        </div>
+
+        <div style="background: rgba(22, 163, 74, 0.15); border: 1px solid rgba(22, 163, 74, 0.3); border-radius: 12px; padding: 1.15rem; margin-top: 1.5rem; text-align: center;">
+          <span style="font-size: 0.75rem; font-weight: 800; color: #4ADE80; text-transform: uppercase;">Total a pagar:</span>
+          <div id="summaryTotalText" style="font-size: 2rem; font-weight: 900; color: #FFFFFF; line-height: 1.2;">
+            R$ 34,90
+          </div>
+          <p style="font-size: 0.76rem; color: #94A3B8;">ou até 3x de R$ 12,25</p>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: #94A3B8;">
+          🔒 Seus dados estão protegidos com criptografia ponta a ponta 256 bits.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    let currentPlan = 'vip';
+
+    function setCheckoutPlan(plan) {
+      currentPlan = plan;
+      const startCard = document.getElementById('selectCardStart');
+      const vipCard = document.getElementById('selectCardVip');
+      const categoryWrapper = document.getElementById('categoryChoiceWrapper');
+
+      if (plan === 'start') {
+        startCard.classList.add('active');
+        vipCard.classList.remove('active');
+        categoryWrapper.classList.add('show');
+      } else {
+        startCard.classList.remove('active');
+        vipCard.classList.add('active');
+        categoryWrapper.classList.remove('show');
+      }
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const titleEl = document.getElementById('summaryPlanTitle');
+      const descEl = document.getElementById('summaryPlanDesc');
+      const priceEl = document.getElementById('summaryPlanPrice');
+      const totalEl = document.getElementById('summaryTotalText');
+      const btnEl = document.getElementById('btnFinishOrder');
+
+      if (currentPlan === 'vip') {
+        titleEl.innerText = 'PLANO VIP COMPLETO';
+        descEl.innerText = 'Acesso às 4 Categorias + 4 Planilhas + Scripts';
+        priceEl.innerText = 'R$ 34,90';
+        totalEl.innerText = 'R$ 34,90';
+        btnEl.innerText = 'GARANTIR ACESSO VIP POR R$ 34,90';
+      } else {
+        const catSelect = document.getElementById('selectedStartCategory');
+        const catName = catSelect.options[catSelect.selectedIndex].text;
+        titleEl.innerText = 'PLANO START (1 Categoria)';
+        descEl.innerText = catName + ' + Planilha';
+        priceEl.innerText = 'R$ 14,90';
+        totalEl.innerText = 'R$ 14,90';
+        btnEl.innerText = 'GARANTIR PLANO START POR R$ 14,90';
+      }
+    }
+
+    function switchPayMethod(type) {
+      const tabPix = document.getElementById('tabPix');
+      const tabCard = document.getElementById('tabCard');
+      if (type === 'pix') {
+        tabPix.style.borderColor = 'var(--accent-green)';
+        tabPix.style.color = '#fff';
+        tabCard.style.borderColor = '#334155';
+        tabCard.style.color = '#94A3B8';
+      } else {
+        tabCard.style.borderColor = 'var(--accent-green)';
+        tabCard.style.color = '#fff';
+        tabPix.style.borderColor = '#334155';
+        tabPix.style.color = '#94A3B8';
+      }
+    }
+
+    function processStandaloneCheckout(event) {
+      event.preventDefault();
+      const name = document.getElementById('custName').value;
+      const email = document.getElementById('custEmail').value;
+      const cat = document.getElementById('selectedStartCategory').value;
+
+      const sessionData = {
+        planType: currentPlan,
+        unlockedCategory: currentPlan === 'vip' ? null : cat,
+        userName: name,
+        userEmail: email,
+        purchasedAt: new Date().toISOString()
+      };
+
+      localStorage.setItem('renda_extra_user_session', JSON.stringify(sessionData));
+
+      const btn = document.getElementById('btnFinishOrder');
+      btn.innerText = 'Liberando acesso com segurança...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 900);
+    }
+  </script>
+</body>
+</html>
